@@ -81,6 +81,11 @@
   function enableEditing() {
     stage.querySelectorAll('[data-key]').forEach(function (el) {
       el.setAttribute('contenteditable', 'true');
+      el.addEventListener('paste', function (e) {
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+      });
     });
     stage.querySelectorAll('[data-img-key]').forEach(function (host) {
       var btn = document.createElement('div');

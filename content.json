@@ -1,7 +1,7 @@
 {
   "texts": {
     "hero-org": "ליבא <span class=\"heart\">♥</span> מרימים את השמיים",
-    "hero-title": "פשט״ות באב",
+    "hero-title": "פשט״ות באב - פסטיבל קטן של סדנאות, ירח מלא ומדבר.",
     "hero-sub": "אהבה יש באוויר — ערב סדנאות, לב וירח מלא",
     "hero-badge": "יום שלישי 28.7.26 · ערב ט״ו באב · מהשקיעה ואל תוך הלילה",
     "hero-cta": "💛 אני בפנים — וואטסאפ לאלעד",
@@ -65,7 +65,12 @@
     "footer-text": "יום שלישי, 28.7.26, מהשקיעה ואל תוך הלילה. מארחים: אלעד ונעמי.",
     "footer-cta": "💛 היי, אשמח להגיע לפשטות באב",
     "footer-fine": "ליבא — מרחב של חיבור, צמיחה ואהבה · מרימים את השמיים<br>אלעד · 052-5311866 (וואטסאפ)",
-    "gallery-heading": "פסטיבלים קודמים שלנו"
+    "gallery-heading": "פסטיבלים קודמים שלנו",
+    "event-date": "יום שלישי, 28.7.26 · ערב ט״ו באב",
+    "event-time": "מ־19:00 ואל תוך הלילה",
+    "event-location": "מדבר יהודה, כפר אדומים",
+    "host-elad-name": "אלעד",
+    "host-naomi-name": "נעמי"
   },
   "images": {
     "w1-cover": "assets/uploads/w1-cover.png",
@@ -86,6 +91,7 @@
     "w2-avatar": "assets/uploads/w2-avatar.jpeg",
     "w3-avatar": "assets/uploads/w3-avatar.jpeg",
     "w4-avatar": "assets/uploads/w4-avatar.jpeg",
-    "w5-avatar": "assets/uploads/w5-avatar.jpeg"
+    "w5-avatar": "assets/uploads/w5-avatar.jpeg",
+    "hero-poster": "assets/uploads/hero-poster.png"
   }
 }
