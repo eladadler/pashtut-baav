@@ -111,5 +111,13 @@
     "hero-poster": "assets/uploads/hero-poster.png",
     "bit-icon": "assets/uploads/bit-icon.webp",
     "paybox-icon": "assets/uploads/paybox-icon.png"
+  },
+  "settings": {
+    "headingFont": "Heebo",
+    "bodyFont": "Heebo",
+    "headingWeight": "600",
+    "bodyWeight": "400",
+    "headingScale": 90,
+    "bodyScale": 100
   }
 }
