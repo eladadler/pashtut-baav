@@ -176,13 +176,7 @@ h2 { font-size: calc(clamp(26px, 4vw, 36px) * var(--heading-scale)); margin: 0 0
 .info-block ul { margin: 0; padding-inline-start: 20px; display: flex; flex-direction: column; gap: 6px; list-style: disc; }
 .info-block ul li { font-size: calc(15px * var(--body-scale)); line-height: 1.6; color: var(--color-neutral-700); }
 .info-block ul::marker, .info-block li::marker { color: var(--color-accent); }
-.info-feedback {
-  display: flex; flex-direction: column; gap: 4px; text-decoration: none;
-  background: var(--color-neutral-100); border-radius: var(--radius-lg); padding: 16px 20px;
-}
-.info-feedback:hover { background: var(--color-neutral-200); }
-.info-feedback-title { font-family: var(--font-heading); font-weight: 700; font-size: 15px; color: var(--color-accent-700); }
-.info-feedback-sub { font-size: 13.5px; color: var(--color-neutral-600); }
+.info-signup-btn { align-self: center; }
 
 /* ---- workshop cards ---- */
 .workshop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 18px; }
