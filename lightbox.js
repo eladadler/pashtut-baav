@@ -57,6 +57,18 @@
     if (e.target.matches && e.target.matches(THUMB_SELECTOR)) {
       e.preventDefault();
       openLightbox(e.target);
+      return;
+    }
+    var moreTile = e.target.closest && e.target.closest('#hero2-more-tile');
+    if (moreTile) {
+      e.preventDefault();
+      currentList = Array.prototype.filter.call(
+        document.querySelectorAll('.gallery-item img'),
+        function (img) { return img.getAttribute('src'); }
+      );
+      show(3);
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
   });
 

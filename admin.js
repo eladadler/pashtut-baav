@@ -167,10 +167,10 @@
       if (el) el.innerHTML = texts[key];
     });
     Object.keys(images).forEach(function (key) {
-      var host = stage.querySelector('[data-img-key="' + key + '"]');
-      if (!host) return;
-      var img = host.querySelector('img');
-      if (img) img.src = images[key];
+      stage.querySelectorAll('[data-img-key="' + key + '"]').forEach(function (host) {
+        var img = host.querySelector('img');
+        if (img) img.src = images[key];
+      });
     });
   }
 
@@ -203,9 +203,10 @@
     reader.onload = function () {
       var dataUrl = reader.result;
       var base64 = dataUrl.split(',')[1];
-      var host = stage.querySelector('[data-img-key="' + pendingImageKey + '"]');
-      var img = host && host.querySelector('img');
-      if (img) img.src = dataUrl;
+      stage.querySelectorAll('[data-img-key="' + pendingImageKey + '"]').forEach(function (host) {
+        var img = host.querySelector('img');
+        if (img) img.src = dataUrl;
+      });
       pendingUploads[pendingImageKey] = { filename: file.name, dataBase64: base64 };
       setStatus('תמונה חדשה מוכנה לשמירה — לחצו "שמור טיוטה"');
     };

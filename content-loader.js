@@ -47,11 +47,27 @@
       });
 
       Object.keys(images).forEach(function (key) {
-        var host = document.querySelector('[data-img-key="' + key + '"]');
-        if (!host) return;
-        var img = host.querySelector('img');
-        if (img && images[key]) img.src = images[key];
+        document.querySelectorAll('[data-img-key="' + key + '"]').forEach(function (host) {
+          var img = host.querySelector('img');
+          if (img && images[key]) img.src = images[key];
+        });
       });
+
+      setupHeroMoreTile(images);
     })
     .catch(function () { /* no saved content yet — defaults in the HTML stand */ });
+
+  function setupHeroMoreTile(images) {
+    var galleryKeys = Object.keys(images)
+      .filter(function (k) { return /^gallery-\d+$/.test(k) && images[k]; })
+      .sort(function (a, b) { return Number(a.split('-')[1]) - Number(b.split('-')[1]); });
+
+    var tile = document.getElementById('hero2-more-tile');
+    if (!tile || galleryKeys.length <= 3) return;
+
+    var extra = galleryKeys.length - 3;
+    document.getElementById('hero2-more-bg').src = images[galleryKeys[3]];
+    document.getElementById('hero2-more-count').textContent = '+' + extra;
+    tile.classList.add('visible');
+  }
 })();
