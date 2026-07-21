@@ -14,15 +14,13 @@ const UPLOADS_DIR = path.join(ROOT, 'assets', 'uploads');
 const INDEX_FILE = path.join(ROOT, 'index.html');
 const SITE_URL = 'https://eladadler.github.io/pashtut-baav/';
 
-function updateOgImage(relPath) {
-  const html = fs.readFileSync(INDEX_FILE, 'utf8');
-  const absUrl = SITE_URL + relPath;
-  const updated = html.replace(
-    /(<meta property="og:image" content=")[^"]*(")/,
-    '$1' + absUrl + '$2'
-  );
-  fs.writeFileSync(INDEX_FILE, updated);
-}
+// og:image intentionally stays pinned to assets/uploads/og-image.jpg — a small,
+// pre-cropped (1200x630) JPEG — rather than whatever raw file gets uploaded as
+// the hero poster. WhatsApp's link-preview crawler silently fails on large
+// images (the original poster PNG was ~2.3MB) even when Facebook's own
+// debugger fetches it fine. If the poster photo changes, regenerate
+// og-image.jpg from it (crop to 1200x630, export as JPEG ~100-150KB) rather
+// than pointing this meta tag at the raw upload again.
 
 fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 if (!fs.existsSync(CONTENT_FILE)) {
