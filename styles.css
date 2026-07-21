@@ -91,12 +91,12 @@ details[open] .chev { transform: rotate(180deg); }
 .hero2-poster:has(img[src]:not([src=""]))::before { display: none; }
 
 .hero2-strip-label { font-size: 13px; font-weight: 700; color: var(--color-neutral-600); margin: 2px 0 0; }
-.hero2-strip { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.hero2-thumb { display: none; width: 92px; height: 92px; border-radius: var(--radius-md); overflow: hidden; flex: none; background: var(--color-neutral-200); }
+.hero2-strip { display: flex; align-items: center; gap: 10px; }
+.hero2-thumb { display: none; aspect-ratio: 1; border-radius: var(--radius-md); overflow: hidden; flex: 1 1 0; min-width: 0; background: var(--color-neutral-200); }
 .hero2-thumb:has(img[src]:not([src=""])) { display: block; }
 .hero2-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero2-more-tile {
-  display: none; position: relative; width: 92px; height: 92px; flex: none;
+  display: none; position: relative; aspect-ratio: 1; flex: 1 1 0; min-width: 0;
   border-radius: var(--radius-md); overflow: hidden; cursor: pointer; background: var(--color-neutral-300);
 }
 .hero2-more-tile.visible { display: block; }
