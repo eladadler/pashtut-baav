@@ -161,7 +161,7 @@ details[open] .chev { transform: rotate(180deg); }
 h2 { font-size: calc(clamp(26px, 4vw, 36px) * var(--heading-scale)); margin: 0 0 6px; }
 
 /* ---- intro ---- */
-.intro { text-align: right; align-items: flex-end; }
+.intro { text-align: right; align-items: stretch; }
 .intro-h1 { font-size: calc(clamp(34px,6vw,52px) * var(--heading-scale)); color: var(--color-neutral-900); }
 .intro-text { font-size: calc(clamp(16px,2.4vw,19px) * var(--body-scale)); line-height: 1.85; margin: 0; color: var(--color-neutral-800); }
 .intro-motto { font-family: var(--font-heading); font-weight: 700; font-size: calc(clamp(17px,2.6vw,21px) * var(--heading-scale)); color: var(--color-accent-700); margin: 0; }
