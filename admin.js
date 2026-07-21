@@ -3,11 +3,103 @@
   var pendingImageKey = null;
   var pendingUploads = {}; // key -> {filename, dataBase64}
 
+  var FONT_OPTIONS = [
+    'Rubik', 'Assistant', 'Heebo', 'Secular One', 'Suez One',
+    'Frank Ruhl Libre', 'Noto Sans Hebrew', 'Varela Round'
+  ];
+  var DEFAULT_SETTINGS = {
+    headingFont: 'Rubik', bodyFont: 'Assistant',
+    headingWeight: '800', bodyWeight: '400',
+    headingScale: 100, bodyScale: 100
+  };
+  var currentSettings = Object.assign({}, DEFAULT_SETTINGS);
+
   var loginScreen = document.getElementById('login-screen');
   var toolbar = document.getElementById('toolbar');
   var stage = document.getElementById('stage');
   var statusEl = document.getElementById('status');
   var fileInput = document.getElementById('file-input');
+  var typographyBtn = document.getElementById('typography-btn');
+  var typographyPanel = document.getElementById('typography-panel');
+  var typographyClose = document.getElementById('typography-close');
+  var headingFontSel = document.getElementById('heading-font');
+  var bodyFontSel = document.getElementById('body-font');
+  var headingWeightSel = document.getElementById('heading-weight');
+  var bodyWeightSel = document.getElementById('body-weight');
+  var headingScaleInput = document.getElementById('heading-scale');
+  var bodyScaleInput = document.getElementById('body-scale');
+  var headingScaleVal = document.getElementById('heading-scale-val');
+  var bodyScaleVal = document.getElementById('body-scale-val');
+
+  function ensureFontLoaded(fontName) {
+    if (!fontName) return;
+    var id = 'gf-' + fontName.replace(/\s+/g, '-');
+    if (document.getElementById(id)) return;
+    var link = document.createElement('link');
+    link.id = id;
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + fontName.replace(/ /g, '+') + ':wght@300;400;500;600;700;800;900&display=swap';
+    document.head.appendChild(link);
+  }
+
+  function applySettingsToDOM(s) {
+    ensureFontLoaded(s.headingFont);
+    ensureFontLoaded(s.bodyFont);
+    var root = document.documentElement.style;
+    root.setProperty('--font-heading', '"' + s.headingFont + '", system-ui, sans-serif');
+    root.setProperty('--font-body', '"' + s.bodyFont + '", system-ui, sans-serif');
+    root.setProperty('--font-heading-weight', s.headingWeight);
+    root.setProperty('--font-body-weight', s.bodyWeight);
+    root.setProperty('--heading-scale', s.headingScale / 100);
+    root.setProperty('--body-scale', s.bodyScale / 100);
+  }
+
+  function populateFontSelects() {
+    [headingFontSel, bodyFontSel].forEach(function (sel) {
+      FONT_OPTIONS.forEach(function (name) {
+        var opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = name;
+        sel.appendChild(opt);
+      });
+    });
+  }
+
+  function syncTypographyControls() {
+    headingFontSel.value = currentSettings.headingFont;
+    bodyFontSel.value = currentSettings.bodyFont;
+    headingWeightSel.value = currentSettings.headingWeight;
+    bodyWeightSel.value = currentSettings.bodyWeight;
+    headingScaleInput.value = currentSettings.headingScale;
+    bodyScaleInput.value = currentSettings.bodyScale;
+    headingScaleVal.textContent = currentSettings.headingScale + '%';
+    bodyScaleVal.textContent = currentSettings.bodyScale + '%';
+  }
+
+  function onTypographyChange() {
+    currentSettings = {
+      headingFont: headingFontSel.value,
+      bodyFont: bodyFontSel.value,
+      headingWeight: headingWeightSel.value,
+      bodyWeight: bodyWeightSel.value,
+      headingScale: Number(headingScaleInput.value),
+      bodyScale: Number(bodyScaleInput.value)
+    };
+    headingScaleVal.textContent = currentSettings.headingScale + '%';
+    bodyScaleVal.textContent = currentSettings.bodyScale + '%';
+    applySettingsToDOM(currentSettings);
+  }
+
+  populateFontSelects();
+  [headingFontSel, bodyFontSel, headingWeightSel, bodyWeightSel, headingScaleInput, bodyScaleInput]
+    .forEach(function (el) { el.addEventListener('input', onTypographyChange); });
+
+  typographyBtn.addEventListener('click', function () {
+    typographyPanel.style.display = typographyPanel.style.display === 'none' ? 'flex' : 'none';
+  });
+  typographyClose.addEventListener('click', function () {
+    typographyPanel.style.display = 'none';
+  });
 
   function setStatus(msg) { statusEl.textContent = msg || ''; }
 
@@ -57,6 +149,10 @@
         if (node.tagName === 'SCRIPT' || node.id === 'file-input') return;
         stage.appendChild(node);
       });
+
+      currentSettings = Object.assign({}, DEFAULT_SETTINGS, content.settings || {});
+      syncTypographyControls();
+      applySettingsToDOM(currentSettings);
 
       applyContent(content);
       enableEditing();
@@ -152,7 +248,7 @@
       var texts = collectTexts();
       return fetch('/api/save', {
         method: 'POST', headers: authHeaders(),
-        body: JSON.stringify({ texts: texts, images: images })
+        body: JSON.stringify({ texts: texts, images: images, settings: currentSettings })
       }).then(function (r) { return r.json(); }).then(function (data) {
         if (data.ok) {
           pendingUploads = {};

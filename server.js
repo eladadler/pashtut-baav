@@ -104,7 +104,8 @@ const server = http.createServer(async (req, res) => {
       const current = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf8'));
       const next = {
         texts: Object.assign({}, current.texts, body.texts || {}),
-        images: Object.assign({}, current.images, body.images || {})
+        images: Object.assign({}, current.images, body.images || {}),
+        settings: Object.assign({}, current.settings, body.settings || {})
       };
       fs.writeFileSync(CONTENT_FILE, JSON.stringify(next, null, 2));
       return json(res, 200, { ok: true });

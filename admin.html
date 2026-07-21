@@ -50,6 +50,27 @@
   .hero2-thumb[data-img-key]:not(:has(img[src]:not([src=""]))) {
     display: block; border: 2px dashed var(--color-neutral-400);
   }
+  #typography-btn { background: var(--color-neutral-700); color: #fff; }
+  #typography-panel {
+    position: fixed; top: 56px; left: 0; z-index: 60; width: 300px; max-height: calc(100vh - 56px);
+    overflow-y: auto; background: var(--color-neutral-100); box-shadow: var(--shadow-lg);
+    padding: 20px; display: flex; flex-direction: column; gap: 18px; font-family: var(--font-body);
+  }
+  #typography-panel h4 { font-size: 14px; margin: 0 0 4px; color: var(--color-accent-700); }
+  #typography-panel .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+  #typography-panel label.row-label { font-size: 12.5px; color: var(--color-neutral-600); }
+  #typography-panel select, #typography-panel input[type="range"] { width: 100%; }
+  #typography-panel select {
+    font-family: var(--font-body); font-size: 14px; padding: 6px 8px;
+    border-radius: 8px; border: 1px solid var(--color-divider);
+  }
+  #typography-panel .scale-row { display: flex; align-items: center; gap: 8px; }
+  #typography-panel .scale-val { font-size: 12.5px; color: var(--color-neutral-600); min-width: 38px; text-align: left; }
+  #typography-close {
+    background: var(--color-neutral-300); color: var(--color-neutral-900);
+    font-family: var(--font-heading); font-weight: 700; font-size: 13px;
+    border: none; border-radius: 999px; padding: 8px 16px; cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -65,8 +86,60 @@
   <strong>מצב עריכה</strong>
   <span id="status"></span>
   <div class="spacer"></div>
+  <button id="typography-btn">🎨 טיפוגרפיה</button>
   <button id="save-btn">שמור טיוטה</button>
   <button id="publish-btn">פרסם לאתר החי 🚀</button>
+</div>
+
+<div id="typography-panel" style="display:none">
+  <h4>כותרות</h4>
+  <div class="field">
+    <label class="row-label">גופן</label>
+    <select id="heading-font"></select>
+  </div>
+  <div class="field">
+    <label class="row-label">עובי</label>
+    <select id="heading-weight">
+      <option value="400">רגיל (400)</option>
+      <option value="500">בינוני (500)</option>
+      <option value="600">מודגש קל (600)</option>
+      <option value="700">מודגש (700)</option>
+      <option value="800">מודגש מאוד (800)</option>
+      <option value="900">כבד (900)</option>
+    </select>
+  </div>
+  <div class="field">
+    <label class="row-label">גודל</label>
+    <div class="scale-row">
+      <input type="range" id="heading-scale" min="70" max="150" step="5">
+      <span class="scale-val" id="heading-scale-val"></span>
+    </div>
+  </div>
+
+  <h4>טקסט רגיל</h4>
+  <div class="field">
+    <label class="row-label">גופן</label>
+    <select id="body-font"></select>
+  </div>
+  <div class="field">
+    <label class="row-label">עובי</label>
+    <select id="body-weight">
+      <option value="300">דק (300)</option>
+      <option value="400">רגיל (400)</option>
+      <option value="500">בינוני (500)</option>
+      <option value="600">מודגש קל (600)</option>
+      <option value="700">מודגש (700)</option>
+    </select>
+  </div>
+  <div class="field">
+    <label class="row-label">גודל</label>
+    <div class="scale-row">
+      <input type="range" id="body-scale" min="70" max="150" step="5">
+      <span class="scale-val" id="body-scale-val"></span>
+    </div>
+  </div>
+
+  <button id="typography-close">סגור</button>
 </div>
 
 <div id="stage"></div>
