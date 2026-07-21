@@ -43,6 +43,10 @@
   [data-img-key]:hover .img-edit-btn { opacity: 1; }
   .w-cover[data-img-key] { min-height: 90px; background: var(--color-neutral-200); }
   .w-cover[data-img-key]:not(:has(img[src]:not([src=""]))) { display: block; margin: -22px -24px 14px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; overflow: hidden; aspect-ratio: 16/9; }
+  .gallery-section { display: block !important; }
+  .gallery-item[data-img-key]:not(:has(img[src]:not([src=""]))) {
+    display: block; border: 2px dashed var(--color-neutral-400);
+  }
 </style>
 </head>
 <body>

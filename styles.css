@@ -181,12 +181,19 @@ h2 { font-size: clamp(26px, 4vw, 36px); margin: 0 0 6px; }
 .avatar:has(img[src]:not([src=""])) .avatar-fallback { display: none; }
 
 /* ---- workshop cover image ---- */
-.w-cover { display: none; }
-.w-cover:has(img[src]:not([src=""])) {
-  display: block; margin: -22px -24px 14px; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+.w-cover {
+  display: none; margin: -22px -24px 14px; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   overflow: hidden; aspect-ratio: 16/9;
 }
+.w-cover:has(img[src]:not([src=""])) { display: block; }
 .w-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---- gallery ---- */
+.gallery-section:not(:has(.gallery-item img[src]:not([src=""]))) { display: none; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.gallery-item { display: none; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 1; background: var(--color-neutral-200); }
+.gallery-item:has(img[src]:not([src=""])) { display: block; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 details { border-top: 1px solid var(--color-divider); padding-top: 10px; }
 details summary { font-size: 13.5px; font-weight: 700; color: var(--color-accent-700); display: flex; align-items: center; gap: 6px; }
 details p { font-size: 13.5px; line-height: 1.65; color: var(--color-neutral-700); margin: 10px 0 0; }
