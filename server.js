@@ -11,6 +11,18 @@ const PORT = process.env.PORT || 8743;
 const SECRET_FILE = path.join(ROOT, '.admin-secret');
 const CONTENT_FILE = path.join(ROOT, 'content.json');
 const UPLOADS_DIR = path.join(ROOT, 'assets', 'uploads');
+const INDEX_FILE = path.join(ROOT, 'index.html');
+const SITE_URL = 'https://eladadler.github.io/pashtut-baav/';
+
+function updateOgImage(relPath) {
+  const html = fs.readFileSync(INDEX_FILE, 'utf8');
+  const absUrl = SITE_URL + relPath;
+  const updated = html.replace(
+    /(<meta property="og:image" content=")[^"]*(")/,
+    '$1' + absUrl + '$2'
+  );
+  fs.writeFileSync(INDEX_FILE, updated);
+}
 
 fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 if (!fs.existsSync(CONTENT_FILE)) {
@@ -108,7 +120,9 @@ const server = http.createServer(async (req, res) => {
       const outName = safeKey + ext;
       const outPath = path.join(UPLOADS_DIR, outName);
       fs.writeFileSync(outPath, Buffer.from(dataBase64, 'base64'));
-      return json(res, 200, { ok: true, path: 'assets/uploads/' + outName });
+      const relPath = 'assets/uploads/' + outName;
+      if (safeKey === 'hero-poster') updateOgImage(relPath);
+      return json(res, 200, { ok: true, path: relPath });
     }
 
     if (req.method === 'POST' && req.url === '/api/publish') {
