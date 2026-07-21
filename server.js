@@ -11,8 +11,6 @@ const PORT = process.env.PORT || 8743;
 const SECRET_FILE = path.join(ROOT, '.admin-secret');
 const CONTENT_FILE = path.join(ROOT, 'content.json');
 const UPLOADS_DIR = path.join(ROOT, 'assets', 'uploads');
-const INDEX_FILE = path.join(ROOT, 'index.html');
-const SITE_URL = 'https://eladadler.github.io/pashtut-baav/';
 
 // og:image intentionally stays pinned to assets/uploads/og-image.jpg — a small,
 // pre-cropped (1200x630) JPEG — rather than whatever raw file gets uploaded as
@@ -120,7 +118,6 @@ const server = http.createServer(async (req, res) => {
       const outPath = path.join(UPLOADS_DIR, outName);
       fs.writeFileSync(outPath, Buffer.from(dataBase64, 'base64'));
       const relPath = 'assets/uploads/' + outName;
-      if (safeKey === 'hero-poster') updateOgImage(relPath);
       return json(res, 200, { ok: true, path: relPath });
     }
 
