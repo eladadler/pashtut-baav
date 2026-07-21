@@ -162,6 +162,7 @@ h2 { font-size: clamp(26px, 4vw, 36px); margin: 0 0 6px; }
 .w-names { font-size: 14px; font-weight: 600; }
 .avatars { display: flex; }
 .avatar {
+  position: relative; overflow: hidden;
   width: 38px; height: 38px; border-radius: 50%; border: 2px solid #fff;
   background: repeating-linear-gradient(45deg, var(--color-neutral-200), var(--color-neutral-200) 3px, var(--color-neutral-300) 3px, var(--color-neutral-300) 6px);
   display: flex; align-items: center; justify-content: center;
@@ -172,6 +173,20 @@ h2 { font-size: clamp(26px, 4vw, 36px); margin: 0 0 6px; }
   background: repeating-linear-gradient(45deg, var(--color-accent-200), var(--color-accent-200) 3px, var(--color-accent-300) 3px, var(--color-accent-300) 6px);
   color: var(--color-accent-800);
 }
+.avatar img { display: none; }
+.avatar img[src]:not([src=""]) {
+  display: block; position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.avatar:has(img[src]:not([src=""])) .avatar-fallback { display: none; }
+
+/* ---- workshop cover image ---- */
+.w-cover { display: none; }
+.w-cover:has(img[src]:not([src=""])) {
+  display: block; margin: -22px -24px 14px; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden; aspect-ratio: 16/9;
+}
+.w-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 details { border-top: 1px solid var(--color-divider); padding-top: 10px; }
 details summary { font-size: 13.5px; font-weight: 700; color: var(--color-accent-700); display: flex; align-items: center; gap: 6px; }
 details p { font-size: 13.5px; line-height: 1.65; color: var(--color-neutral-700); margin: 10px 0 0; }
