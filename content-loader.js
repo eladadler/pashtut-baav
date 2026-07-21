@@ -63,10 +63,10 @@
       .sort(function (a, b) { return Number(a.split('-')[1]) - Number(b.split('-')[1]); });
 
     var tile = document.getElementById('hero2-more-tile');
-    if (!tile || galleryKeys.length <= 3) return;
+    if (!tile || galleryKeys.length <= 2) return;
 
-    var extra = galleryKeys.length - 3;
-    document.getElementById('hero2-more-bg').src = images[galleryKeys[3]];
+    var extra = galleryKeys.length - 2;
+    document.getElementById('hero2-more-bg').src = images[galleryKeys[2]];
     document.getElementById('hero2-more-count').textContent = '+' + extra;
     tile.classList.add('visible');
   }

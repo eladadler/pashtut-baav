@@ -66,7 +66,7 @@
         document.querySelectorAll('.gallery-item img'),
         function (img) { return img.getAttribute('src'); }
       );
-      show(3);
+      show(2);
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
