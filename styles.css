@@ -295,6 +295,9 @@ details p { font-size: calc(13.5px * var(--body-scale)); line-height: 1.65; colo
 .footer-cta p { font-size: calc(16px * var(--body-scale)); line-height: 1.7; color: var(--color-neutral-400); margin: 0; }
 .footer-cta .btn-footer { align-self: center; }
 .footer-fine { font-size: 13.5px !important; color: var(--color-neutral-500) !important; margin: 14px 0 0 !important; }
+.footer-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+.footer-links a { font-size: 13.5px; color: var(--color-accent-300); text-decoration: none; }
+.footer-links a:hover { color: var(--color-accent-200); }
 
 /* ---- lightbox ---- */
 .hero2-thumb img, .gallery-item img { cursor: zoom-in; }
